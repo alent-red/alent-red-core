@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package alent_red_core.agents;
+
+import "google/protobuf/timestamp.proto";
+
+enum AgentReasoning {
+  AGENT_REASONING_DEFAULT = 0;
+  AGENT_REASONING_MINIMAL = 1;
+  AGENT_REASONING_LOW = 2;
+  AGENT_REASONING_MEDIUM = 3;
+  AGENT_REASONING_HIGH = 4;
+  AGENT_REASONING_XHIGH = 5;
+}
+
+enum AgentVerbosity {
+  AGENT_VERBOSITY_DEFAULT = 0;
+  AGENT_VERBOSITY_LOW = 1;
+  AGENT_VERBOSITY_MEDIUM = 2;
+  AGENT_VERBOSITY_HIGH = 3;
+}
+
+message Agent {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  optional string picture_file_key = 5;
+  optional string prompt = 6;
+  AgentReasoning reasoning = 7;
+  AgentVerbosity verbosity = 8;
+  optional string llm_model_id = 9;
+  repeated string attached_file_paths = 10;
+}
+
+message AgentInput {
+  string name = 1;
+  optional string picture_file_key = 2;
+  optional string prompt = 3;
+  AgentReasoning reasoning = 4;
+  AgentVerbosity verbosity = 5;
+  string llm_model_id = 6;
+  repeated string brick_ids = 7;
+  repeated string attached_file_paths = 8;
+}
+
+message GetAllAgentsRequest {
+  optional string llm_model_id = 1;
+  optional string brick_id = 2;
+}
+
+message GetAllAgentsResponse {
+  repeated Agent agents = 1;
+}
+
+message GetAgentRequest {
+  string id = 1;
+}
+
+message GetAgentResponse {
+  Agent agent = 1;
+}
+
+message SaveAgentRequest {
+  optional string id = 1;
+  AgentInput agent = 2;
+}
+
+message SaveAgentResponse {
+  Agent agent = 1;
+}
+
+message DeleteAgentRequest {
+  string id = 1;
+}
+
+message DeleteAgentResponse {}

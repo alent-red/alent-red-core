@@ -1,0 +1,125 @@
+from enum import Enum
+
+
+class Key(str, Enum):
+    """Keyboard key identifiers.
+
+    Contains every key supported on any platform. Each
+    SystemAccess implementation exposes its own subset (the
+    `allowed_keys` property) and rejects keys outside that subset
+    with NOT_SUPPORTED.
+    """
+
+    # macOS modifiers
+    CMD = "CMD"
+    OPTION = "OPTION"
+
+    # Windows modifiers
+    ALT = "ALT"
+    WIN = "WIN"
+
+    # Cross-platform modifiers
+    CONTROL = "CONTROL"
+    SHIFT = "SHIFT"
+
+    # Navigation
+    HOME = "HOME"
+    END = "END"
+    PAGE_UP = "PAGE_UP"
+    PAGE_DOWN = "PAGE_DOWN"
+    ARROW_UP = "ARROW_UP"
+    ARROW_DOWN = "ARROW_DOWN"
+    ARROW_LEFT = "ARROW_LEFT"
+    ARROW_RIGHT = "ARROW_RIGHT"
+
+    # Function keys
+    F1 = "F1"
+    F2 = "F2"
+    F3 = "F3"
+    F4 = "F4"
+    F5 = "F5"
+    F6 = "F6"
+    F7 = "F7"
+    F8 = "F8"
+    F9 = "F9"
+    F10 = "F10"
+    F11 = "F11"
+    F12 = "F12"
+
+    # Special keys
+    SPACE = "SPACE"
+    TAB = "TAB"
+    ENTER = "ENTER"
+    BACKSPACE = "BACKSPACE"
+    DELETE = "DELETE"
+    ESCAPE = "ESCAPE"
+
+    # Letters
+    A = "A"
+    B = "B"
+    C = "C"
+    D = "D"
+    E = "E"
+    F = "F"
+    G = "G"
+    H = "H"
+    I = "I"
+    J = "J"
+    K = "K"
+    L = "L"
+    M = "M"
+    N = "N"
+    O = "O"
+    P = "P"
+    Q = "Q"
+    R = "R"
+    S = "S"
+    T = "T"
+    U = "U"
+    V = "V"
+    W = "W"
+    X = "X"
+    Y = "Y"
+    Z = "Z"
+
+    # Numbers
+    NUMBER_0 = "NUMBER_0"
+    NUMBER_1 = "NUMBER_1"
+    NUMBER_2 = "NUMBER_2"
+    NUMBER_3 = "NUMBER_3"
+    NUMBER_4 = "NUMBER_4"
+    NUMBER_5 = "NUMBER_5"
+    NUMBER_6 = "NUMBER_6"
+    NUMBER_7 = "NUMBER_7"
+    NUMBER_8 = "NUMBER_8"
+    NUMBER_9 = "NUMBER_9"
+
+    # Punctuation
+    PUNCTUATION_EXCLAMATION_MARK = "PUNCTUATION_EXCLAMATION_MARK"
+    PUNCTUATION_QUESTION_MARK = "PUNCTUATION_QUESTION_MARK"
+    PUNCTUATION_PERIOD = "PUNCTUATION_PERIOD"
+    PUNCTUATION_COMMA = "PUNCTUATION_COMMA"
+    PUNCTUATION_SEMICOLON = "PUNCTUATION_SEMICOLON"
+    PUNCTUATION_COLON = "PUNCTUATION_COLON"
+    PUNCTUATION_SINGLE_QUOTE = "PUNCTUATION_SINGLE_QUOTE"
+    PUNCTUATION_DOUBLE_QUOTE = "PUNCTUATION_DOUBLE_QUOTE"
+    PUNCTUATION_LEFT_PARENTHESIS = "PUNCTUATION_LEFT_PARENTHESIS"
+    PUNCTUATION_RIGHT_PARENTHESIS = "PUNCTUATION_RIGHT_PARENTHESIS"
+    PUNCTUATION_LEFT_BRACKET = "PUNCTUATION_LEFT_BRACKET"
+    PUNCTUATION_RIGHT_BRACKET = "PUNCTUATION_RIGHT_BRACKET"
+    PUNCTUATION_LEFT_BRACE = "PUNCTUATION_LEFT_BRACE"
+    PUNCTUATION_RIGHT_BRACE = "PUNCTUATION_RIGHT_BRACE"
+    PUNCTUATION_PIPE = "PUNCTUATION_PIPE"
+    PUNCTUATION_SLASH = "PUNCTUATION_SLASH"
+    PUNCTUATION_AT_SIGN = "PUNCTUATION_AT_SIGN"
+    PUNCTUATION_HASH = "PUNCTUATION_HASH"
+    PUNCTUATION_DOLLAR_SIGN = "PUNCTUATION_DOLLAR_SIGN"
+    PUNCTUATION_PERCENT_SIGN = "PUNCTUATION_PERCENT_SIGN"
+    PUNCTUATION_AMPERSAND = "PUNCTUATION_AMPERSAND"
+    PUNCTUATION_ASTERISK = "PUNCTUATION_ASTERISK"
+    PUNCTUATION_PLUS = "PUNCTUATION_PLUS"
+    PUNCTUATION_MINUS = "PUNCTUATION_MINUS"
+    PUNCTUATION_EQUAL = "PUNCTUATION_EQUAL"
+    PUNCTUATION_UNDERSCORE = "PUNCTUATION_UNDERSCORE"
+    PUNCTUATION_TILDE = "PUNCTUATION_TILDE"
+    PUNCTUATION_BACKTICK = "PUNCTUATION_BACKTICK"

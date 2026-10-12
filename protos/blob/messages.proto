@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package alent_red_core.blob;
+
+message Blob {
+  bytes content = 1;
+  string content_type = 2;
+  optional string file_name = 3;
+}
+
+message SaveBlobRequest {
+  Blob blob = 1;
+}
+
+message SaveBlobResponse {
+  string key = 1;
+}
+
+message ReadBlobRequest {
+  string key = 1;
+}
+
+message ReadBlobResponse {
+  Blob blob = 1;
+}

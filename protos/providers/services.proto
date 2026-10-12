@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package alent_red_core.providers;
+
+import "providers/messages.proto";
+
+service Providers {
+  rpc GetAll(GetAllProvidersRequest) returns (GetAllProvidersResponse);
+  rpc Get(GetProviderRequest) returns (GetProviderResponse);
+  rpc Save(SaveProviderRequest) returns (SaveProviderResponse);
+  rpc Delete(DeleteProviderRequest) returns (DeleteProviderResponse);
+}

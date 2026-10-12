@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package alent_red_core.messages;
+
+import "google/protobuf/timestamp.proto";
+import "common/errors.proto";
+
+message MessageContentInternal {
+  string text = 1;
+}
+
+message MessageContentUser {
+  string text = 1;
+  repeated string attached_file_paths = 2;
+}
+
+message MessageContentAi {
+  string text = 1;
+  bool processing = 2;
+}
+
+message MessageContentToolResponse {
+  optional string text = 1;
+  repeated string image_file_keys = 2;
+}
+
+message MessageContentTool {
+  string name = 1;
+  bool processing = 2;
+  optional alent_red_core.common.ErrorCode error = 3;
+  string request = 4;
+  optional MessageContentToolResponse response = 5;
+}
+
+message MessageContent {
+  oneof content {
+    MessageContentInternal internal = 1;
+    MessageContentUser user = 2;
+    MessageContentAi ai = 3;
+    MessageContentTool tool = 4;
+  }
+}
+
+message Message {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  MessageContent content = 4;
+  string conversation_id = 5;
+}
+
+message MessageContentUserInput {
+  string text = 1;
+  repeated string attached_file_paths = 2;
+  string conversation_id = 3;
+}
+
+message GetAllMessagesRequest {
+  string conversation_id = 1;
+  optional string before_message_id = 2;
+  optional int32 count = 3;
+}
+
+message GetAllMessagesResponse {
+  repeated Message messages = 1;
+}
+
+message SaveMessageRequest {
+  optional string id = 1;
+  MessageContentUserInput message_content_user_input = 2;
+}
+
+message SaveMessageResponse {
+  Message message = 1;
+}
+
+message WatchMessageSavesRequest {
+  string conversation_id = 1;
+}
+
+message WatchMessageSavesResponse {
+  Message message = 1;
+}
+
+message WatchMessageDeleteAftersRequest {
+  string conversation_id = 1;
+}
+
+message WatchMessageDeleteAftersResponse {
+  string message_id = 1;
+}

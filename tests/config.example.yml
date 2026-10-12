@@ -1,0 +1,8 @@
+providers:
+  anthropic:
+    api_key: ""
+  openai:
+    api_key: ""
+
+timeouts:
+  server_readiness_seconds: 10

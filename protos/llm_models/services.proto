@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package alent_red_core.llm_models;
+
+import "llm_models/messages.proto";
+
+service LlmModels {
+  rpc GetAll(GetAllLlmModelsRequest) returns (GetAllLlmModelsResponse);
+  rpc Get(GetLlmModelRequest) returns (GetLlmModelResponse);
+  rpc Save(SaveLlmModelRequest) returns (SaveLlmModelResponse);
+  rpc Delete(DeleteLlmModelRequest) returns (DeleteLlmModelResponse);
+}

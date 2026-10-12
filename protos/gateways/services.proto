@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package alent_red_core.gateways;
+
+import "gateways/messages.proto";
+
+service Gateways {
+  rpc GetAll(GetAllGatewaysRequest) returns (GetAllGatewaysResponse);
+  rpc Get(GetGatewayRequest) returns (GetGatewayResponse);
+  rpc Save(SaveGatewayRequest) returns (SaveGatewayResponse);
+  rpc Delete(DeleteGatewayRequest) returns (DeleteGatewayResponse);
+}

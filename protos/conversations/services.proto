@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package alent_red_core.conversations;
+
+import "conversations/messages.proto";
+
+service Conversations {
+  rpc GetAll(GetAllConversationsRequest) returns (GetAllConversationsResponse);
+  rpc Get(GetConversationRequest) returns (GetConversationResponse);
+  rpc Save(SaveConversationRequest) returns (SaveConversationResponse);
+  rpc Delete(DeleteConversationRequest) returns (DeleteConversationResponse);
+  rpc Split(SplitConversationRequest) returns (SplitConversationResponse);
+  rpc Pause(PauseConversationRequest) returns (PauseConversationResponse);
+  rpc WatchSaves(WatchConversationSavesRequest) returns (stream WatchConversationSavesResponse);
+  rpc WatchDeletions(WatchConversationDeletionsRequest) returns (stream WatchConversationDeletionsResponse);
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package alent_red_core.messages;
+
+import "messages/messages.proto";
+
+service Messages {
+  rpc GetAll(GetAllMessagesRequest) returns (GetAllMessagesResponse);
+  rpc Save(SaveMessageRequest) returns (SaveMessageResponse);
+  rpc WatchSaves(WatchMessageSavesRequest) returns (stream WatchMessageSavesResponse);
+  rpc WatchDeleteAfters(WatchMessageDeleteAftersRequest) returns (stream WatchMessageDeleteAftersResponse);
+}

@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package alent_red_core.preferences;
+
+import "google/protobuf/timestamp.proto";
+
+enum PreferenceKey {
+  PREFERENCE_KEY_UNSPECIFIED = 0;
+  PREFERENCE_KEY_SYSTEM_PROMPT = 1;
+  PREFERENCE_KEY_AGENT_PROMPT_PLACEHOLDER = 2;
+  PREFERENCE_KEY_BRICK_PROMPT_PLACEHOLDER = 3;
+  PREFERENCE_KEY_ATTACHED_FILE_PATH_PROMPT_PREFIX = 4;
+  PREFERENCE_KEY_BRICK_PROMPT_SEPARATOR = 5;
+  PREFERENCE_KEY_BRICK_TOOL_NAME_SEPARATOR = 6;
+  PREFERENCE_KEY_ATTACHED_FILE_PATH_PROMPT_SEPARATOR = 7;
+  PREFERENCE_KEY_NO_TOOL_RESPONSE_PROMPT = 8;
+  PREFERENCE_KEY_OPEN_AI_BASE_URL = 9;
+  PREFERENCE_KEY_ANTHROPIC_BASE_URL = 10;
+  PREFERENCE_KEY_ANTHROPIC_REASONING_MINIMAL_BUDGET_TOKENS = 11;
+  PREFERENCE_KEY_ANTHROPIC_REASONING_LOW_BUDGET_TOKENS = 12;
+  PREFERENCE_KEY_ANTHROPIC_REASONING_MEDIUM_BUDGET_TOKENS = 13;
+  PREFERENCE_KEY_ANTHROPIC_REASONING_HIGH_BUDGET_TOKENS = 14;
+  PREFERENCE_KEY_ANTHROPIC_REASONING_XHIGH_BUDGET_TOKENS = 15;
+  PREFERENCE_KEY_ANTHROPIC_CACHE_MEDIUM_TTL = 16;
+  PREFERENCE_KEY_ANTHROPIC_CACHE_HIGH_TTL = 17;
+  PREFERENCE_KEY_LLM_STREAM = 18;
+}
+
+enum PreferenceValueType {
+  PREFERENCE_VALUE_TYPE_UNSPECIFIED = 0;
+  PREFERENCE_VALUE_TYPE_STRING = 1;
+  PREFERENCE_VALUE_TYPE_INT = 2;
+  PREFERENCE_VALUE_TYPE_FLOAT = 3;
+  PREFERENCE_VALUE_TYPE_BOOL = 4;
+}
+
+message PreferenceValueString {
+  string value = 1;
+}
+
+message PreferenceValueInt {
+  int64 value = 1;
+}
+
+message PreferenceValueFloat {
+  double value = 1;
+}
+
+message PreferenceValueBool {
+  bool value = 1;
+}
+
+message PreferenceValue {
+  oneof value {
+    PreferenceValueString string_value = 1;
+    PreferenceValueInt int_value = 2;
+    PreferenceValueFloat float_value = 3;
+    PreferenceValueBool bool_value = 4;
+  }
+}
+
+message PreferenceInput {
+  PreferenceKey key = 1;
+  PreferenceValue value = 2;
+}
+
+message Preference {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  PreferenceKey key = 4;
+  PreferenceValue value = 5;
+}
+
+message GetAllPreferencesRequest {}
+
+message GetAllPreferencesResponse {
+  repeated Preference preferences = 1;
+}
+
+message SaveManyPreferencesRequest {
+  repeated PreferenceInput preferences = 1;
+}
+
+message SaveManyPreferencesResponse {
+  repeated Preference preferences = 1;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package alent_red_core.info;
+
+message GetInfoRequest {}
+
+message GetInfoResponse {
+  string version = 1;
+  int32 pid = 2;
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package alent_red_core.info;
+
+import "info/messages.proto";
+
+service Info {
+  rpc GetInfo(GetInfoRequest) returns (GetInfoResponse);
+}

@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package alent_red_core.conversations;
+
+import "google/protobuf/timestamp.proto";
+import "common/errors.proto";
+
+message ConversationSender {
+  optional string name = 1;
+  optional string user_name = 2;
+  optional string picture_file_key = 3;
+}
+
+message Conversation {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  optional string name = 4;
+  bool processing = 5;
+  optional alent_red_core.common.ErrorCode error_code = 6;
+  optional string error_message = 7;
+  optional string agent_id = 8;
+  optional string gateway_id = 9;
+  optional string gateway_external_id = 10;
+  optional ConversationSender sender = 11;
+  optional int32 context_tokens_count = 12;
+}
+
+message ConversationInput {
+  optional string name = 1;
+  string agent_id = 2;
+}
+
+message GetAllConversationsRequest {
+  optional string agent_id = 1;
+}
+
+message GetAllConversationsResponse {
+  repeated Conversation conversations = 1;
+}
+
+message GetConversationRequest {
+  string id = 1;
+}
+
+message GetConversationResponse {
+  Conversation conversation = 1;
+}
+
+message SaveConversationRequest {
+  optional string id = 1;
+  ConversationInput conversation = 2;
+}
+
+message SaveConversationResponse {
+  Conversation conversation = 1;
+}
+
+message DeleteConversationRequest {
+  string id = 1;
+}
+
+message DeleteConversationResponse {}
+
+message SplitConversationRequest {
+  string split_at_message_id = 1;
+}
+
+message SplitConversationResponse {
+  Conversation conversation = 1;
+}
+
+message PauseConversationRequest {
+  string id = 1;
+}
+
+message PauseConversationResponse {}
+
+message WatchConversationSavesRequest {
+  optional string conversation_id = 1;
+}
+
+message WatchConversationSavesResponse {
+  Conversation conversation = 1;
+}
+
+message WatchConversationDeletionsRequest {}
+
+message WatchConversationDeletionsResponse {
+  string id = 1;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package alent_red_core.blob;
+
+import "blob/messages.proto";
+
+service Blobs {
+  rpc Save(SaveBlobRequest) returns (SaveBlobResponse);
+  rpc Read(ReadBlobRequest) returns (ReadBlobResponse);
+}

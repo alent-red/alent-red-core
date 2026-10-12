@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package alent_red_core.gateways;
+
+import "google/protobuf/timestamp.proto";
+import "common/errors.proto";
+
+message GatewayConfigTelegram {
+  string token = 1;
+  bool allow_all = 2;
+  repeated string allowed_user_names = 3;
+}
+
+message GatewayConfig {
+  oneof config {
+    GatewayConfigTelegram telegram = 1;
+  }
+}
+
+message GatewayInput {
+  string name = 1;
+  bool send_detailed_messages = 2;
+  GatewayConfig config = 3;
+  string agent_id = 4;
+}
+
+message Gateway {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  bool send_detailed_messages = 5;
+  GatewayConfig config = 6;
+  string agent_id = 7;
+  optional alent_red_core.common.ErrorCode error_code = 8;
+  optional string error_message = 9;
+}
+
+message GetAllGatewaysRequest {
+  optional string agent_id = 1;
+}
+
+message GetAllGatewaysResponse {
+  repeated Gateway gateways = 1;
+}
+
+message GetGatewayRequest {
+  string id = 1;
+}
+
+message GetGatewayResponse {
+  Gateway gateway = 1;
+}
+
+message SaveGatewayRequest {
+  optional string id = 1;
+  GatewayInput gateway = 2;
+}
+
+message SaveGatewayResponse {
+  Gateway gateway = 1;
+}
+
+message DeleteGatewayRequest {
+  string id = 1;
+}
+
+message DeleteGatewayResponse {}

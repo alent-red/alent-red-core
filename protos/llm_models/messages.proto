@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package alent_red_core.llm_models;
+
+import "google/protobuf/timestamp.proto";
+
+enum LlmModelImageDetail {
+  LLM_MODEL_IMAGE_DETAIL_DEFAULT = 0;
+  LLM_MODEL_IMAGE_DETAIL_LOW = 1;
+  LLM_MODEL_IMAGE_DETAIL_HIGH = 2;
+}
+
+enum LlmModelCache {
+  LLM_MODEL_CACHE_DEFAULT = 0;
+  LLM_MODEL_CACHE_MEDIUM = 1;
+  LLM_MODEL_CACHE_HIGH = 2;
+}
+
+message LlmModel {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string model_id = 5;
+  int32 context_window_tokens_count = 6;
+  int32 max_output_tokens_count = 7;
+  double top_p = 8;
+  LlmModelImageDetail image_detail = 9;
+  LlmModelCache cache = 10;
+  string provider_id = 11;
+}
+
+message LlmModelInput {
+  string name = 1;
+  string model_id = 2;
+  int32 context_window_tokens_count = 3;
+  int32 max_output_tokens_count = 4;
+  double top_p = 5;
+  LlmModelImageDetail image_detail = 6;
+  LlmModelCache cache = 7;
+  string provider_id = 8;
+}
+
+message GetAllLlmModelsRequest {
+  optional string provider_id = 1;
+}
+
+message GetAllLlmModelsResponse {
+  repeated LlmModel llm_models = 1;
+}
+
+message GetLlmModelRequest {
+  string id = 1;
+}
+
+message GetLlmModelResponse {
+  LlmModel llm_model = 1;
+}
+
+message SaveLlmModelRequest {
+  optional string id = 1;
+  LlmModelInput llm_model = 2;
+}
+
+message SaveLlmModelResponse {
+  LlmModel llm_model = 1;
+}
+
+message DeleteLlmModelRequest {
+  string id = 1;
+}
+
+message DeleteLlmModelResponse {}

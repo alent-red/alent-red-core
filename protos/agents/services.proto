@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package alent_red_core.agents;
+
+import "agents/messages.proto";
+
+service Agents {
+  rpc GetAll(GetAllAgentsRequest) returns (GetAllAgentsResponse);
+  rpc Get(GetAgentRequest) returns (GetAgentResponse);
+  rpc Save(SaveAgentRequest) returns (SaveAgentResponse);
+  rpc Delete(DeleteAgentRequest) returns (DeleteAgentResponse);
+}

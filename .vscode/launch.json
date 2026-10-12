@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "alent_red_core",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Attach to Debug",
+      "type": "debugpy",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      }
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package alent_red_core.bricks;
+
+import "google/protobuf/timestamp.proto";
+
+enum BrickConfigType {
+  BRICK_CONFIG_TYPE_UNSPECIFIED = 0;
+  BRICK_CONFIG_TYPE_UI = 1;
+  BRICK_CONFIG_TYPE_CODE = 2;
+  BRICK_CONFIG_TYPE_SYSTEM = 3;
+  BRICK_CONFIG_TYPE_SCHEDULER = 4;
+  BRICK_CONFIG_TYPE_RENDERER = 5;
+  BRICK_CONFIG_TYPE_BROWSER = 6;
+  BRICK_CONFIG_TYPE_AGENT = 7;
+  BRICK_CONFIG_TYPE_CUSTOM = 8;
+  BRICK_CONFIG_TYPE_VISION = 9;
+  BRICK_CONFIG_TYPE_SKILLS = 10;
+}
+
+enum BrickConfigUIMovePointerGeometry {
+  BRICK_CONFIG_UI_MOVE_POINTER_GEOMETRY_UNSPECIFIED = 0;
+  BRICK_CONFIG_UI_MOVE_POINTER_GEOMETRY_POINT = 1;
+  BRICK_CONFIG_UI_MOVE_POINTER_GEOMETRY_BOUNDING_BOX = 2;
+}
+
+enum BrickConfigUIMovePointerCoordinateSpace {
+  BRICK_CONFIG_UI_MOVE_POINTER_COORDINATE_SPACE_UNSPECIFIED = 0;
+  BRICK_CONFIG_UI_MOVE_POINTER_COORDINATE_SPACE_PIXELS = 1;
+  BRICK_CONFIG_UI_MOVE_POINTER_COORDINATE_SPACE_NORMALIZED_1000 = 2;
+}
+
+message BrickConfigUI {
+  string move_pointer_llm_model_id = 1;
+  BrickConfigUIMovePointerGeometry move_pointer_geometry = 2;
+  BrickConfigUIMovePointerCoordinateSpace move_pointer_coordinate_space = 3;
+}
+
+message BrickConfigCode {}
+
+message BrickConfigSystem {}
+
+message BrickConfigScheduler {}
+
+message BrickConfigRenderer {}
+
+message BrickConfigBrowser {}
+
+message BrickConfigAgent {}
+
+message BrickConfigVision {}
+
+message BrickConfigSkills {}
+
+message BrickConfigCustom {
+  string path = 1;
+}
+
+message BrickConfig {
+  oneof config {
+    BrickConfigUI ui = 1;
+    BrickConfigCode code = 2;
+    BrickConfigSystem system = 3;
+    BrickConfigScheduler scheduler = 4;
+    BrickConfigRenderer renderer = 5;
+    BrickConfigBrowser browser = 6;
+    BrickConfigAgent agent = 7;
+    BrickConfigCustom custom = 8;
+    BrickConfigVision vision = 9;
+    BrickConfigSkills skills = 10;
+  }
+}
+
+message BrickInput {
+  string name = 1;
+  BrickConfig config = 2;
+}
+
+message Brick {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  BrickConfig config = 5;
+}
+
+message GetAllBricksRequest {
+  optional string agent_id = 1;
+}
+
+message GetAllBricksResponse {
+  repeated Brick bricks = 1;
+}
+
+message GetBrickRequest {
+  string id = 1;
+}
+
+message GetBrickResponse {
+  Brick brick = 1;
+}
+
+message SaveBrickRequest {
+  optional string id = 1;
+  BrickInput brick = 2;
+}
+
+message SaveBrickResponse {
+  Brick brick = 1;
+}
+
+message DeleteBrickRequest {
+  string id = 1;
+}
+
+message DeleteBrickResponse {}

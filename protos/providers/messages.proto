@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package alent_red_core.providers;
+
+import "google/protobuf/timestamp.proto";
+
+enum ProviderConfigType {
+  PROVIDER_CONFIG_TYPE_UNSPECIFIED = 0;
+  PROVIDER_CONFIG_TYPE_ANTHROPIC = 1;
+  PROVIDER_CONFIG_TYPE_OPENAI = 2;
+  PROVIDER_CONFIG_TYPE_LM_STUDIO = 3;
+  PROVIDER_CONFIG_TYPE_CUSTOM = 4;
+}
+
+enum ProviderApiFormatAnthropicCacheTtl {
+  PROVIDER_API_FORMAT_ANTHROPIC_CACHE_TTL_DEFAULT = 0;
+  PROVIDER_API_FORMAT_ANTHROPIC_CACHE_TTL_MIN_5 = 1;
+  PROVIDER_API_FORMAT_ANTHROPIC_CACHE_TTL_HOUR_1 = 2;
+}
+
+message ProviderApiFormatAnthropic {
+  int32 reasoning_minimal_budget_tokens = 1;
+  int32 reasoning_low_budget_tokens = 2;
+  int32 reasoning_medium_budget_tokens = 3;
+  int32 reasoning_high_budget_tokens = 4;
+  int32 reasoning_xhigh_budget_tokens = 5;
+  ProviderApiFormatAnthropicCacheTtl cache_medium_ttl = 6;
+  ProviderApiFormatAnthropicCacheTtl cache_high_ttl = 7;
+}
+
+message ProviderApiFormatOpenAiChatCompletions {}
+
+message ProviderApiFormatOpenAiResponses {}
+
+message ProviderApiFormat {
+  oneof format {
+    ProviderApiFormatAnthropic anthropic = 1;
+    ProviderApiFormatOpenAiChatCompletions openai_chat_completions = 2;
+    ProviderApiFormatOpenAiResponses openai_responses = 3;
+  }
+}
+
+message ProviderConfigAnthropic {
+  string api_key = 1;
+}
+
+message ProviderConfigOpenAI {
+  string api_key = 1;
+}
+
+message ProviderConfigLMStudio {
+  string base_url = 1;
+}
+
+message ProviderConfigCustom {
+  string base_url = 1;
+  optional string api_key = 2;
+  ProviderApiFormat api_format = 3;
+}
+
+message ProviderConfig {
+  oneof config {
+    ProviderConfigAnthropic anthropic = 1;
+    ProviderConfigOpenAI openai = 2;
+    ProviderConfigLMStudio lm_studio = 3;
+    ProviderConfigCustom custom = 4;
+  }
+}
+
+message ProviderInput {
+  string name = 1;
+  ProviderConfig config = 2;
+}
+
+message Provider {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  ProviderConfig config = 5;
+}
+
+message GetAllProvidersRequest {}
+
+message GetAllProvidersResponse {
+  repeated Provider providers = 1;
+}
+
+message GetProviderRequest {
+  string id = 1;
+}
+
+message GetProviderResponse {
+  Provider provider = 1;
+}
+
+message SaveProviderRequest {
+  optional string id = 1;
+  ProviderInput provider = 2;
+}
+
+message SaveProviderResponse {
+  Provider provider = 1;
+}
+
+message DeleteProviderRequest {
+  string id = 1;
+}
+
+message DeleteProviderResponse {}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package alent_red_core.bricks;
+
+import "bricks/messages.proto";
+
+service Bricks {
+  rpc GetAll(GetAllBricksRequest) returns (GetAllBricksResponse);
+  rpc Get(GetBrickRequest) returns (GetBrickResponse);
+  rpc Save(SaveBrickRequest) returns (SaveBrickResponse);
+  rpc Delete(DeleteBrickRequest) returns (DeleteBrickResponse);
+}
